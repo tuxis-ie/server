@@ -103,6 +103,9 @@ class UserPlugin implements ISearchPlugin {
 						'shareWith' => $uid,
 					],
 				];
+				if ($user->getEMailAddress()) {
+					$userData['value']['emailAddress'] = $user->getEMailAddress();
+				}
 				$result['exact'][] = $userData;
 			} else {
 				$userData = [
@@ -112,6 +115,9 @@ class UserPlugin implements ISearchPlugin {
 						'shareWith' => $uid,
 					],
 				];
+				if ($user->getEMailAddress()) {
+					$userData['value']['emailAddress'] = $user->getEMailAddress();
+				}
 				$result['wide'][] = $userData;
 			}
 		}
@@ -137,6 +143,9 @@ class UserPlugin implements ISearchPlugin {
 							'shareWith' => $user->getUID(),
 						],
 					];
+					if ($user->getEMailAddress()) {
+						$userData['value']['emailAddress'] = $user->getEMailAddress();
+					}
 					$result['exact'][] = $userData;
 				}
 			}
