@@ -104,7 +104,7 @@ class UserPlugin implements ISearchPlugin {
 					],
 				];
 				if ($user->getEMailAddress()) {
-					$userData['value']['emailAddress'] = $user->getEMailAddress();
+					$userData['value']['hasEmailAddress'] = true;
 				}
 				$result['exact'][] = $userData;
 			} else {
@@ -116,7 +116,7 @@ class UserPlugin implements ISearchPlugin {
 					],
 				];
 				if ($user->getEMailAddress()) {
-					$userData['value']['emailAddress'] = $user->getEMailAddress();
+					$userData['value']['hasEmailAddress'] = true;
 				}
 				$result['wide'][] = $userData;
 			}
@@ -144,7 +144,7 @@ class UserPlugin implements ISearchPlugin {
 						],
 					];
 					if ($user->getEMailAddress()) {
-						$userData['value']['emailAddress'] = $user->getEMailAddress();
+						$userData['value']['hasEmailAddress'] = true;
 					}
 					$result['exact'][] = $userData;
 				}
