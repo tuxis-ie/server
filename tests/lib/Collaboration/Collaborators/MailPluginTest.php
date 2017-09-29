@@ -344,8 +344,23 @@ class MailPluginTest extends TestCase {
 					]
 				],
 				false,
-				['users' => [], 'exact' => ['users' => [['label' => 'User (test@example.com)','value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test'],]]]],
+				['users' => [], 'exact' => ['users' => [['label' => 'User (test@example.com)','value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test', 'hasEmailAddress' => true],]]]],
 				true,
+				false,
+			],
+			[
+				'test@ex',
+				[
+					[
+						'FN' => 'User',
+						'EMAIL' => ['test@example.com'],
+						'CLOUD' => ['test@localhost'],
+						'isLocalSystemBook' => true,
+					]
+				],
+				true,
+				['users' => [['label' => 'User (test@example.com)','value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test', 'hasEmailAddress' => true],]], 'emails' => [], 'exact' => ['users' => [], 'emails' => []]],
+				false,
 				false,
 			],
 			// Current local user found by email => no result
@@ -395,8 +410,8 @@ class MailPluginTest extends TestCase {
 				],
 				true,
 				['users' => [
-					['label' => 'User1 (test@example.com)', 'value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test1']],
-					['label' => 'User2 (test@example.de)', 'value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test2']],
+					['label' => 'User1 (test@example.com)', 'value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test1', 'hasEmailAddress' => true]],
+					['label' => 'User2 (test@example.de)', 'value' => ['shareType' => Share::SHARE_TYPE_USER, 'shareWith' => 'test2', 'hasEmailAddress' => true]],
 				], 'emails' => [], 'exact' => ['users' => [], 'emails' => []]],
 				false,
 				true,
@@ -513,7 +528,7 @@ class MailPluginTest extends TestCase {
 						'UID' => 'User'
 					]
 				],
-				['users' => [['label' => 'User (test@example.com)','value' => ['shareType' => 0, 'shareWith' => 'test'],]], 'emails' => [], 'exact' => ['emails' => [], 'users' => []]],
+				['users' => [['label' => 'User (test@example.com)','value' => ['shareType' => 0, 'shareWith' => 'test', 'hasEmailAddress' => true],]], 'emails' => [], 'exact' => ['emails' => [], 'users' => []]],
 				false,
 				false,
 				[
