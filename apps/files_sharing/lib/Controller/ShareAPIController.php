@@ -498,6 +498,7 @@ class ShareAPIController extends OCSController {
 	 * @param string $id
 	 * @return DataResponse
 	 * @throws OCSNotFoundException
+	 * @throws OCSException
 	 */
 	public function resendMailNotification($id) {
 		try {
@@ -510,7 +511,11 @@ class ShareAPIController extends OCSController {
 			throw new OCSNotFoundException($this->l->t('Wrong share ID, share doesn\'t exist', $id));
 		}
 
-		$this->shareManager->resendMailNotification($share);
+		try {
+			$this->shareManager->resendMailNotification($share);
+		} catch (\Exception $exception) {
+			throw new OCSException($this->l->t('Could not send again the mail notification: %s', $exception->getMessage()));
+		}
 
 		return new DataResponse();
 	}
