@@ -31,3 +31,7 @@
 #updatenotification .icon-triangle-n {
 	opacity: 0.5;
 }
+
+#updatenotification .warning {
+	color: #ce3702;
+}
