@@ -608,6 +608,7 @@ class Access extends LDAPUtility implements IUserTools {
 			|| (!$isUser && !\OC::$server->getGroupManager()->groupExists($intName))) {
 			if($mapper->map($fdn, $intName, $uuid)) {
 				$this->connection->setConfiguration(array('ldapCacheTTL' => $originalTTL));
+				\OC::$server->getUserManager()->emit('\OC\User', 'announceUser', [$intName]);
 				$newlyMapped = true;
 				return $intName;
 			}
@@ -616,6 +617,7 @@ class Access extends LDAPUtility implements IUserTools {
 
 		$altName = $this->createAltInternalOwnCloudName($intName, $isUser);
 		if(is_string($altName) && $mapper->map($fdn, $altName, $uuid)) {
+			\OC::$server->getUserManager()->emit('\OC\User', 'announceUser', [$intName]);
 			$newlyMapped = true;
 			return $altName;
 		}
