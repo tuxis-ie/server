@@ -2853,33 +2853,6 @@ class UsersControllerTest extends TestCase {
 		$this->assertEquals(['TargetGroup'], $this->api->getUserSubAdminGroups('RequestedUser')->getData());
 	}
 
-	/**
-	 * @expectedException \OCP\AppFramework\OCS\OCSException
-	 * @expectedExceptionCode 102
-	 * @expectedExceptionMessage Unknown error occurred
-	 */
-	public function testGetUserSubAdminGroupsWithoutGroups() {
-		$targetUser = $this->getMockBuilder(IUser::class)->disableOriginalConstructor()->getMock();
-		$this->userManager
-			->expects($this->once())
-			->method('get')
-			->with('RequestedUser')
-			->will($this->returnValue($targetUser));
-		$subAdminManager = $this->getMockBuilder('OC\SubAdmin')
-			->disableOriginalConstructor()->getMock();
-		$subAdminManager
-			->expects($this->once())
-			->method('getSubAdminsGroups')
-			->with($targetUser)
-			->will($this->returnValue([]));
-		$this->groupManager
-			->expects($this->once())
-			->method('getSubAdmin')
-			->will($this->returnValue($subAdminManager));
-
-		$this->api->getUserSubAdminGroups('RequestedUser');
-	}
-
 	public function testEnableUser() {
 		$targetUser = $this->getMockBuilder(IUser::class)->disableOriginalConstructor()->getMock();
 		$targetUser->expects($this->once())
